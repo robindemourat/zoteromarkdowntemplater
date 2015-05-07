@@ -1,0 +1,213 @@
+/*
+PRIMARY LAYOUT
+*/
+body{
+  height : 100%;
+  width: 100%;
+  position : absolute;
+}
+
+.header{
+}
+.container{
+  width : 100%!important;
+  padding: 0;
+  position : absolute;
+  margin: 0!important;
+  left: 0!important;
+  top: 0;
+}
+
+.column{
+  height : 100%;
+  overflow : hidden;
+  margin : 0;
+}
+
+.column,.bottom-group{
+  padding: 0 1em 0 1em;
+}
+
+.column:nth-child(odd){
+  background : #e7e7e7;
+}
+
+.row{
+  width : 100%;
+  margin : 0;
+}
+
+/*
+ANIMATIONS
+*/
+
+.animate
+{
+    -webkit-transition: all .5s ease;
+       -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+         -o-transition: all .5s ease;
+}
+
+.animate-fast
+{
+    -webkit-transition: all .1s ease;
+       -moz-transition: all .1s ease;
+        -ms-transition: all .1s ease;
+         -o-transition: all .1s ease;
+}
+
+.animate.ng-enter.ng-enter-active,
+.animate.ng-leave,
+.animate-fast.ng-enter.ng-enter-active,
+.animate-fast.ng-leave
+{
+    opacity: 1;
+}
+
+/* Remove animation */
+.animate.ng-leave.ng-leave-active,
+.animate.ng-enter,
+.animate-fast.ng-leave.ng-leave-active,
+.animate-fast.ng-enter
+{
+    opacity: 0;
+}
+
+.animate.ng-hide-add-active,
+.animate-fast.ng-hide-add-active
+{
+    opacity: 0;
+}
+.animate.ng-hide-remove-active,
+.animate-fast.ng-hide-remove-active
+{
+    opacity: 1;
+}
+
+.animate.ng-show-add-active,
+.animate-fast.ng-show-add-active
+{
+    opacity: 0;
+}
+.animate.ng-show-remove-active,
+.animate-fast.ng-show-remove-active
+{
+    opacity: 1;
+}
+
+/*
+GENERIC LAYOUT
+*/
+.long-container{
+  overflow : hidden;
+  overflow-y : auto;
+}
+
+.consultable-container{
+  overflow-y : auto;
+}
+
+.step-header{
+}
+
+.inline-options-container{
+  display : flex;
+}
+
+.inline-option{
+  flex-grow: 1;
+}
+
+form.inline-option{
+  width : 100%;
+  padding-right : .5em;
+}
+
+.inline-option-big{
+  flex-grow : 3;
+}
+
+.bottom-group{
+  bottom: 0;
+  left: 0;
+  position : absolute;
+}
+
+.final-step{
+  display : flex;
+  padding : 1em 0 1em 0;
+}
+
+.final-step.btn-group .btn{
+  flex-grow : 1;
+  margin-right : 1em;
+  background: #e7e7e7;
+  border-radius : .5em;
+}
+
+.final-step.btn-group .btn:last-child{
+  margin-right : 0;
+}
+
+textarea{
+  width : 100%;
+  background : inherit;
+  outline : none;
+  border : none;
+  resize :none;
+}
+
+input[type=text]{
+  outline : none;
+  border : none;
+}
+
+input[type=submit]{
+  background: #e7e7e7;
+  border : none;
+}
+
+input:focus{
+  background: #e7e7e7;
+}
+
+/*
+SPECIFIC STYLES
+*/
+
+/*
+2 - selectors (input, possible filters, ...)
+*/
+.selectors-container{
+  padding-bottom : 1em;
+}
+
+/*
+2 - zotero items
+*/
+.zotero-item {
+  background: #e7e7e7;
+  padding : 1em;
+  margin-bottom : 1em;
+  cursor : pointer;
+}
+
+.results-display-container .more-items{
+  background: #e7e7e7;
+  text-align: center;
+  text-transform : uppercase;
+  font-weight : 800;
+  padding : 1em;
+  cursor : pointer;
+}
+
+/*
+2 - selected items
+*/
+.selected-list-wrapper{
+  max-height : 5em;
+}
+.selected-list-container{
+  /*overflow-y : auto;*/
+}
