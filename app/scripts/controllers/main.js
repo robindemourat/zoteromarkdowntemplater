@@ -37,7 +37,6 @@ angular.module('zoteromarkdownApp')
 		  	    $scope.selectedItems = [];
 		  	    $scope.overallQueryStart = 0;
 		  	    $scope.getMore();
-
   			});
   		
   	};
@@ -166,7 +165,7 @@ angular.module('zoteromarkdownApp')
   				}else if((""+val).toLowerCase().indexOf($scope.searchQuery.toLowerCase()) > -1){
   							match = true;
   							break;
-				}
+				  }
   			}
   			return match;
   		}
