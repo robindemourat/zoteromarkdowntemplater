@@ -85,7 +85,6 @@ angular.module('zoteromarkdownApp')
   	var appendToListOfItems = function(d){
   		for(var i in d){
   			var item = d[i];
-        //console.log(item);
   			if(!itemExists(item, $scope.overallItems))
   				$scope.overallItems.push(item);
   		}

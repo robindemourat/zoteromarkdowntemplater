@@ -51,8 +51,8 @@
     </div>
   </div>
 
-  <div class="row results-display-container fitheight long-container" resizetrigger="{{selectedItems.length}}">
-    <div class="consultable-container">
+  <div class="row results-display-container fitheight long-container animate" resizetrigger="{{selectedItems.length}}">
+    <div class="consultable-container animate">
 
       <div class="loading"
         ng-show="overallItems.length == 0"
@@ -60,7 +60,7 @@
         Loading
       </div>
       <div 
-        class="zotero-item"
+        class="zotero-item animate"
         ng-repeat="item in overallItems | filter:searchInItem"
         ng-click="addToSelected($index)"
       >
