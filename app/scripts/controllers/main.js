@@ -35,6 +35,7 @@ angular.module('zoteromarkdownApp')
   	    		query = ZoteroQueryBuilder.init($scope.apiKey, $scope.userId).searchItemType('-attachment');
 		  	    $scope.overallItems = [];
 		  	    $scope.selectedItems = [];
+            $scope.exportAsList = false;
 		  	    $scope.overallQueryStart = 0;
 		  	    $scope.getMore();
   			});
@@ -202,9 +203,52 @@ angular.module('zoteromarkdownApp')
   		query.apiKey(apiKey);
   	};
 
-  	$scope.copyToClipboard = function(str){
+    $scope.switchExportAsList = function(){
+      $scope.exportAsList = !$scope.exportAsList;
+    };
+
+    var downloadFile = function(content, filename){
+      console.log(filename);
+      var blob = new Blob([content], { type : 'text/txt' });
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      var url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = filename;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    $scope.downloadItems = function(items){
+      if($scope.exportAsList){
+        var output = '';
+        for(var i in items){
+          output += ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, items[i]).body + '\n\n';
+        }
+        downloadFile(output, 'zotero_items_list.md');
+      }else{
+        for(var i in items){
+          var item = items[i];
+          console.log()
+          var output = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, item);
+          downloadFile(output.body, output.filename+'.md');
+        }
+      }
+    };
+
+  	$scope.copyToClipboard = function(items){
+      var output = "";
+      if($scope.exportAsList){
+        for(var i in items){
+          output += ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, items[i]).body + '\n\n';
+        }
+      }else{
+        output += ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, items[0]).body;
+      }
+        
       $log.info('processed result copied to clipboard');
-  		return str;
+  		return output;
   	};
 
 

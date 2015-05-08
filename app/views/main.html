@@ -131,11 +131,13 @@
     </div>
   </div>
   <div class="row bottom-group">
-    <div class="row final-step btn-group">
+    <div 
+      class="row final-step btn-group"
+      ng-if="selectedItems.length > 0"
+    >
       <div 
           class="btn"
-          ng-init="exportAsList=false"
-          ng-click="exportAsList = !exportAsList"
+          ng-click="switchExportAsList()"
       >
           <span ng-if="exportAsList">
             list
@@ -146,11 +148,14 @@
       </div>
       <div 
         class="btn"
-        clip-copy="copyToClipboard(processedPreview)"
+        clip-copy="copyToClipboard(selectedItems)"
       >
         clipboard
       </div>
-      <div class="btn">
+      <div 
+        class="btn"
+        ng-click="downloadItems(selectedItems)"
+      >
         download
       </div>
     </div>
