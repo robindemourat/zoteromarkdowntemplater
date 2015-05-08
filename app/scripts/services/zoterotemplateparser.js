@@ -19,27 +19,20 @@ angular.module('zoteromarkdownApp')
     	'url' : ['data', 'url'],
     	'date' : ['data', 'date'],
         'language' : ['data', 'language'],
-
         'short_title' : ['data', 'shortTitle'],
 
         'abstract' : ['data', 'abstractNote'],
 
         'website_title' : ['data', 'websiteTitle'],
-
         'website_type' : ['data', 'websiteType'],
 
         'ISSN' : ['data', 'ISSN'],
         'DOI' : ['data', 'DOI'],
         'issue_number' : ['data', 'issue'],
         'volume_number': ['data', 'volume'],
-
         'pages' : ['data', 'pages'],
-
         'publication_title' : ['data', 'publicationTitle'],
-
         "library_catalog" : ['data', 'libraryCatalog'],
-
-
 
 
     	'creator_1_first_name' : ['data', 'creators', 0, 'firstName'],
@@ -75,7 +68,7 @@ angular.module('zoteromarkdownApp')
     			break;
     	}
     	return cursor;
-    }
+    };
 
     var fetchVal = function(val, item){
     	var n = findValInItem(val, item);
@@ -84,7 +77,7 @@ angular.module('zoteromarkdownApp')
 
     var checkVal = function(val, item){
     	return (findValInItem(val,item))?true:false;
-    }
+    };
 
     var populateTemplate = function(template, item){
         //var r = /\$(\w+):(\w+)\$/gi;
@@ -123,29 +116,30 @@ angular.module('zoteromarkdownApp')
                         }
 	    			break;
 
-
 	    			default:
 	    			break;
 	    		}
     		}
-    	}
+    	};
         //title grabbing
-        //var titleMatch = /(\$filename:begin\$[\s\w\S]*\$filename:end\$)/gi;
-        var titleMatch = /(\$filename:begin\$[\s\w\S]*\$filename:end\$)/gi;
-        var titleValsMatch = /(\$filename:begin\$)([\s\w\S]*)(\$filename:end\$)/gi;
-        var title = '';
-        var titleVals = line.match(titleMatch);
+        var titleMatch = /(\$filename:begin\$[\s\w\S]*\$filename:end\$)/gi,
+            titleValsMatch = /(\$filename:begin\$)([\s\w\S]*)(\$filename:end\$)/gi,
+            title = '',
+            titleVals = line.match(titleMatch);
         if(titleVals){
             line = line.replace(titleMatch, '');
             var values = titleValsMatch.exec(titleVals[0]);
             title = values[2];
-        }
-    	return {body : line, filename : title};
-    }
+        };
+    	return {
+                    body : line, 
+                    filename : title
+                };
+    };
 
     factory.parseZoteroItemWithTemplate = function(template, item){
     	return populateTemplate(template, item);
-    }
+    };
 
     return factory;
   });
