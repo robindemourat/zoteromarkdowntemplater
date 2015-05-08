@@ -73,7 +73,10 @@
 
         <p class="zotero-type"  ng-bind="'Item type : '+item.data.itemType">Type of entry</p>
         <p class="zotero-url" ng-if="item.data.url">
-          <a target="blank" ng-href="{{item.data.url}}">Link</a>
+          <a target="blank" ng-href="{{item.data.url}}">Original link</a>
+        </p>
+        <p class="zotero-url">
+          <a target="blank" ng-href="{{item.links.alternate.href}}">Zotero link</a>
         </p>
       </div>
 

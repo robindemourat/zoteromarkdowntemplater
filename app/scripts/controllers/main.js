@@ -87,6 +87,7 @@ angular.module('zoteromarkdownApp')
   	var appendToListOfItems = function(d){
   		for(var i in d){
   			var item = d[i];
+        console.log(item);
   			if(!itemExists(item, $scope.overallItems))
   				$scope.overallItems.push(item);
   		}
@@ -169,7 +170,7 @@ angular.module('zoteromarkdownApp')
   							break;
 				}
   			}
-  			return match;//item.data.title.toLowerCase().indexOf($scope.searchQuery.toLowerCase()) > -1;
+  			return match;
   		}
   		else return true;
   	}

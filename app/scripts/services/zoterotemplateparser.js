@@ -61,14 +61,13 @@ angular.module('zoteromarkdownApp')
     	return (findValInItem(val,item))?true:false;
     }
 
-    var evalLineFromTemplate = function(line, template, item){
+    var populateTemplate = function(template, item){
     	var r = /\$(\w+):(\w+)\$/gi;
+        var line = template;
     	var matches = line.match(r);
     	if(matches){
-    		//console.log(line);
     		for(var i in matches){
     			r.exec('');
-    			//console.log(+i, matches[+i], r, r.exec(''));
     			var expressions = r.exec(''+matches[+i]);
     			var statement = expressions[1];
 	    		var val = expressions[2];
@@ -92,19 +91,12 @@ angular.module('zoteromarkdownApp')
 	    			break;
 	    		}
     		}
-    		//console.log(line);
     	}
     	return line;
     }
 
     factory.parseZoteroItemWithTemplate = function(template, item){
-
-    	var lines = template.split(/\r\n?|\n/);
-    	var output = [];
-    	for(var i in lines){
-    		output.push(evalLineFromTemplate(lines[i], template, item));
-    	}
-    	return output.join('\n');
+    	return populateTemplate( template, item);
     }
 
     return factory;
