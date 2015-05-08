@@ -33,7 +33,6 @@ angular.module('zoteromarkdownApp')
   	    		$log.error('credentials not found. Write them in root/credentials/credentials.json with an object containing properties userId and apiKey, or paste your API in the interface.')
   			}).then(function(){
   	    		query = ZoteroQueryBuilder.init($scope.apiKey, $scope.userId).searchItemType('-attachment');
-  	    		//fetch 100 first items
 		  	    $scope.overallItems = [];
 		  	    $scope.selectedItems = [];
 		  	    $scope.overallQueryStart = 0;
@@ -44,19 +43,19 @@ angular.module('zoteromarkdownApp')
   	};
 
   	var updatePreview = function(template){
-  		if(!template|| !$scope.overallItems)return;
-  		console.log('updated');
-		if(!$scope.selectedItems){
-			if($scope.overallItems.length > 0){
-				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]);
-			}
-			else $scope.processedPreview = $scope.activeTemplate;
-		}else if($scope.selectedItems.length === 0){
-			if($scope.overallItems.length > 0)
-				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]);
-		}else {
-			$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.selectedItems[0]);
-		}
+    	if(!template|| !$scope.overallItems)
+        return;
+  		else if(!$scope.selectedItems){
+  			if($scope.overallItems.length > 0){
+  				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]);
+  			}
+  			else $scope.processedPreview = $scope.activeTemplate;
+  		}else if($scope.selectedItems.length === 0){
+  			if($scope.overallItems.length > 0)
+  				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]);
+  		}else {
+  			$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.selectedItems[0]);
+  		}
   		
   		if($scope.processedPreview)	
   			$scope.displayedPreview = markdown.toHTML($scope.processedPreview);
@@ -75,19 +74,19 @@ angular.module('zoteromarkdownApp')
   				return true;
   		}
   		return false;
-  	}
+  	};
 
   	var findItem = function(item, collection){
   		for(var i in collection){
   			if(collection[i].key === item.key)
   				return i;
   		}
-  	}
+  	};
 
   	var appendToListOfItems = function(d){
   		for(var i in d){
   			var item = d[i];
-        console.log(item);
+        //console.log(item);
   			if(!itemExists(item, $scope.overallItems))
   				$scope.overallItems.push(item);
   		}
@@ -101,19 +100,18 @@ angular.module('zoteromarkdownApp')
   					$scope.overallItems.unshift(item);
   			}
   		}
-  	}
-
-
+  	};
 
   	$scope.addToSelected = function(index){
   		var d = $scope.overallItems[index];
   		if(!itemExists(d, $scope.selectedItems)){
   			$scope.selectedItems.push($scope.overallItems[index]);
   		}
-  	}
+  	};
+
   	$scope.removeFromSelected = function(index){
   		$scope.selectedItems.splice(index, 1);
-  	}
+  	};
 
   	$scope.getMore = function(){
   		if($scope.searchQuery){
@@ -134,7 +132,7 @@ angular.module('zoteromarkdownApp')
   			if(index)
   				$scope.addToSelected(index);
   		}
-  	}
+  	};
 
   	$scope.searchInItem = function(item){
   		var match = false;
@@ -173,18 +171,18 @@ angular.module('zoteromarkdownApp')
   			return match;
   		}
   		else return true;
-  	}
+  	};
 
   	$scope.newZoteroQuery = function(expression){
   		query.quickSearch(expression).start(0);
   		$log.info('new query to zotero', expression);
   		ZoteroQueryHandler.getItems(query.get(), prependToListOfItems);
-  	}
+  	};
 
   	$scope.changeAPIKey = function(apiKey){
   		$log.info('new api key', apiKey);
   		query.apiKey(apiKey);
-  	}
+  	};
 
   	$scope.copyToClipboard = function(str){
   		return str;
