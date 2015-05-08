@@ -108,8 +108,8 @@ angular.module('zoteromarkdownApp')
                         }
                     break;
 
-	    			//replace by value
-	    			case 'set':
+        			//replace by value
+                    case 'set':
                         if(val != 'endif'){
                             var newVal = fetchVal(val, item);
                             line = line.replace(matching, newVal);
@@ -121,7 +121,7 @@ angular.module('zoteromarkdownApp')
 	    		}
     		}
     	};
-        //title grabbing
+        //filename grabbing (after everything else has been proceeded)
         var titleMatch = /(\$filename:begin\$[\s\w\S]*\$filename:end\$)/gi,
             titleValsMatch = /(\$filename:begin\$)([\s\w\S]*)(\$filename:end\$)/gi,
             title = '',
