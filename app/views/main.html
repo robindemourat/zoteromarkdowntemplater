@@ -36,7 +36,7 @@
       <input class="inline-option" type="submit">
     </form>
     <div 
-      class="inline-option"
+      class="inline-option btn"
       ng-click="addAllMatching()"
     >
       All
@@ -62,14 +62,17 @@
             {{creator.firstName}} {{creator.lastName}}, {{creator.creatorType}}.
           </p>
         </p>
-
+        
         <p class="zotero-type"  ng-bind="'Item type : '+item.data.itemType">Type of entry</p>
-        <p class="zotero-url" ng-if="item.data.url">
-          <a target="blank" ng-href="{{item.data.url}}">Original link</a>
-        </p>
-        <p class="zotero-url">
-          <a target="blank" ng-href="{{item.links.alternate.href}}">Zotero link</a>
-        </p>
+
+        <div class="btn-group">
+            <a target="blank"  class="zotero-url btn" ng-if="item.data.url" ng-href="{{item.data.url}}">  
+              Original link
+            </a>
+            <a class="zotero-url btn" target="blank" ng-href="{{item.links.alternate.href}}">
+              Zotero link
+            </a>
+        </div>
       </div>
 
       <div 
@@ -89,7 +92,9 @@
       class="row selected-items-container animate"
       ng-show="selectedItems.length > 0"
     >
-      <h3>Items selected for processing</h3>
+      <h3>
+        Items selected for processing ({{selectedItems.length}})
+      </h3>
     </div>
     <div class="selected-list-wrapper long-container">
       <div class="selected-list-container consultable-container">
@@ -128,12 +133,26 @@
   <div class="row bottom-group">
     <div class="row final-step btn-group">
       <div 
+          class="btn"
+          ng-init="exportAsList=false"
+          ng-click="exportAsList = !exportAsList"
+      >
+          <span ng-if="exportAsList">
+            list
+          </span>
+          <span ng-if="!exportAsList">
+            files
+          </span>
+      </div>
+      <div 
         class="btn"
         clip-copy="copyToClipboard(processedPreview)"
       >
         clipboard
       </div>
-      <div class="btn">download</div>
+      <div class="btn">
+        download
+      </div>
     </div>
   </div>
 </div>

@@ -98,7 +98,6 @@ angular.module('zoteromarkdownApp')
     			var statement = expressions[1];
 	    		var val = expressions[2];
                 var matching = new RegExp('\\\$'+statement+':'+val+'\\\$', 'g');
-
                 //case of implicit 'set'
                 if(!val){
                     val = expressions[1];
@@ -106,19 +105,21 @@ angular.module('zoteromarkdownApp')
                     matching = new RegExp('\\\$'+val+'\\\$', 'g');
                 }
 	    		switch(statement){
-	    			//replace by value
-	    			case 'set':
-	    				var newVal = fetchVal(val, item);
-	    				line = line.replace(matching, newVal);
-	    			break;
-
-	    			//conditionnal
-	    			case 'if':
+                    //conditionnal
+                    case 'if':
                         var catchExpression = new RegExp('(\\\$'+statement+':'+val+'\\\$)[\\\s|\\\w|\\\S]*(\\\$endif\\\$)', 'gi');
                         var catchAll = new RegExp('(\\\$'+statement+':'+val+'\\\$[\\\s|\\\w|\\\S]*\\\$endif\\\$)', 'gi');
                         var toDelete = (checkVal(val, item))?catchExpression.exec(line):catchAll.exec(line);
                         if(toDelete){
                             line = line.replace(toDelete[1], '').replace(toDelete[2], '');
+                        }
+                    break;
+
+	    			//replace by value
+	    			case 'set':
+                        if(val != 'endif'){
+                            var newVal = fetchVal(val, item);
+                            line = line.replace(matching, newVal);
                         }
 	    			break;
 
@@ -139,7 +140,7 @@ angular.module('zoteromarkdownApp')
             var values = titleValsMatch.exec(titleVals[0]);
             title = values[2];
         }
-    	return {body : line, title : title};
+    	return {body : line, filename : title};
     }
 
     factory.parseZoteroItemWithTemplate = function(template, item){

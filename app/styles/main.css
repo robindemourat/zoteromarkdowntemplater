@@ -109,6 +109,7 @@ GENERIC LAYOUT
 }
 
 .step-header{
+  font-size : 1em;
 }
 
 .inline-options-container{
@@ -188,9 +189,18 @@ SPECIFIC STYLES
 */
 .zotero-item {
   background: #e7e7e7;
-  padding : 1em;
-  margin-bottom : 1em;
+  padding : .2em 1em .2em 1em;
+  margin-bottom : .2em;
   cursor : pointer;
+}
+
+.zotero-item h4{
+  font-size : 1em;
+}
+
+.zotero-item p{
+  margin : 0;
+  font-size : .8em;
 }
 
 .results-display-container .more-items{

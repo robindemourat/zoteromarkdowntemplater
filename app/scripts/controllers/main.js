@@ -41,11 +41,30 @@ angular.module('zoteromarkdownApp')
   		
   	};
 
+    var preparePreview = function(template, collection){
+      var output = '';
+
+      if(collection.length){
+        for(var i in collection){
+          var data = ZoteroTemplateParser.parseZoteroItemWithTemplate(template, collection[i]);
+         output += '\nFilename \n**************\n>'+data.filename + '.md\n**************\nContent\n**************\n'+data.body + '\n**************\n';
+        }
+      }else{
+        var data = ZoteroTemplateParser.parseZoteroItemWithTemplate(template, collection);
+        output += 'Filename \n**************\n>'+data.filename + '.md\n**************\nContent\n**************\n'+data.body;
+      }
+      return output;
+    }
+
   	var updatePreview = function(template){
-    	if(!template|| !$scope.overallItems)
+    	if(!template|| !$scope.overallItems || !$scope.selectedItems)
         return;
-  		else if(!$scope.selectedItems){
-  			if($scope.overallItems.length > 0){
+  		else if($scope.selectedItems.length == 0 && $scope.overallItems.length > 0){
+        $scope.processedPreview = preparePreview($scope.activeTemplate, $scope.overallItems[0]);
+      }else{
+        $scope.processedPreview = preparePreview($scope.activeTemplate, $scope.selectedItems);
+      }
+  			/*if($scope.overallItems.length > 0){
   				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]).body;
   			}
   			else $scope.processedPreview = $scope.activeTemplate;
@@ -54,10 +73,11 @@ angular.module('zoteromarkdownApp')
   				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]).body;
   		}else {
   			$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.selectedItems[0]).body;
-  		}
+  		}*/
   		
-  		if($scope.processedPreview)	
+  		if($scope.processedPreview){
   			$scope.displayedPreview = markdown.toHTML($scope.processedPreview);
+      }
   	};
 
   	var initWatchers = function(){
@@ -183,6 +203,7 @@ angular.module('zoteromarkdownApp')
   	};
 
   	$scope.copyToClipboard = function(str){
+      $log.info('processed result copied to clipboard');
   		return str;
   	};
 
