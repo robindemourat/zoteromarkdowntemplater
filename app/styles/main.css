@@ -40,9 +40,10 @@ body{
   height : 100%;
   overflow : hidden;
   margin : 0;
+  padding : 0;
 }
 
-.column,.bottom-group{
+.row{
   padding: 0 1em 0 1em;
 }
 
@@ -117,6 +118,18 @@ ANIMATIONS
 /*
 GENERIC LAYOUT
 */
+
+a{
+  color : inherit;
+  text-decoration : none;
+  font-weight : 800;
+}
+
+a:hover{
+  text-decoration : none;
+  color :inherit;
+}
+
 .long-container{
   overflow : hidden;
   overflow-y : auto;
@@ -182,6 +195,7 @@ textarea{
   outline : none;
   border : none;
   resize :none;
+  background : white;
 }
 
 input[type=text]{
@@ -237,11 +251,37 @@ SPECIFIC STYLES
   cursor : pointer;
 }
 
+.zotero-item .btn-group{
+  margin-top : .5em;
+}
+
+.zotero-item .btn{
+  background : rgba(0,0,0,.1);
+  font-size : .8em;
+  padding : .2em;
+}
+
 /*
 2 - selected items
 */
+
+.selected-items-container{
+  background: #666666;
+  color: white;
+}
+
+.selected-items-container h3{
+  font-size : 1em;
+  text-transform: uppercase;
+}
+
+.selected-list-container .zotero-item{
+  background: #333333;
+  color : white;
+}
+
 .selected-list-wrapper{
-  max-height : 5em;
+  max-height : 10em;
 }
 .selected-list-container{
   /*overflow-y : auto;*/

@@ -38,6 +38,7 @@ angular.module('zoteromarkdownApp')
             $scope.exportAsList = false;
 		  	    $scope.overallQueryStart = 0;
 		  	    $scope.getMore();
+            $scope.alerts = [];
   			});
   		
   	};
@@ -121,6 +122,10 @@ angular.module('zoteromarkdownApp')
   	$scope.removeFromSelected = function(index){
   		$scope.selectedItems.splice(index, 1);
   	};
+
+    $scope.clearAllSelected = function(){
+      $scope.selectedItems = [];
+    }
 
   	$scope.getMore = function(){
   		if($scope.searchQuery){
@@ -237,10 +242,25 @@ angular.module('zoteromarkdownApp')
       }else{
         output += ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, items[0]).body;
       }
-        
+
+      $scope.addAlert('success','Processed result copied to clipboard');
       $log.info('processed result copied to clipboard');
   		return output;
   	};
+
+    $scope.addAlert = function(type, msg){
+      $scope.alerts.unshift({type : type, msg: msg});
+      $scope.$apply();
+      $timeout(function(){
+        console.log($scope.alerts);
+        $scope.alerts.pop();
+        console.log($scope.alerts);
+      }, 5000);
+    }
+
+    $scope.closeAlert = function(index){
+      $scope.alerts.splice(index, 1);
+    }
 
 
   	initVariables();

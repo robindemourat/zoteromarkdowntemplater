@@ -18,6 +18,7 @@ angular
     'ngTouch',
     'ngClipboard',
     'monospaced.elastic',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider, ngClipProvider) {
     $routeProvider
