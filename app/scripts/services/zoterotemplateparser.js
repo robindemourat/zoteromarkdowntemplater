@@ -123,14 +123,23 @@ angular.module('zoteromarkdownApp')
 	    			break;
 
 
-	    			//not recognized, clean
 	    			default:
-		    			line = line.replace(matching, '');
 	    			break;
 	    		}
     		}
     	}
-    	return line;
+        //title grabbing
+        //var titleMatch = /(\$filename:begin\$[\s\w\S]*\$filename:end\$)/gi;
+        var titleMatch = /(\$filename:begin\$[\s\w\S]*\$filename:end\$)/gi;
+        var titleValsMatch = /(\$filename:begin\$)([\s\w\S]*)(\$filename:end\$)/gi;
+        var title = '';
+        var titleVals = line.match(titleMatch);
+        if(titleVals){
+            line = line.replace(titleMatch, '');
+            var values = titleValsMatch.exec(titleVals[0]);
+            title = values[2];
+        }
+    	return {body : line, title : title};
     }
 
     factory.parseZoteroItemWithTemplate = function(template, item){

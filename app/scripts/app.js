@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngClipboard'
+    'ngClipboard',
+    'monospaced.elastic',
   ])
   .config(function ($routeProvider, ngClipProvider) {
     $routeProvider

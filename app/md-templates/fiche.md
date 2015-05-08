@@ -1,3 +1,5 @@
+$filename:begin$ $type$ - $creator_1_first_name$ $creator_1_last_name$ ($date$) - $title$ $filename:end$
+
 $title$, par $creator_1_first_name$ $creator_1_last_name$
 ===================
 

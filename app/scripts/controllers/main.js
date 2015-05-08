@@ -46,14 +46,14 @@ angular.module('zoteromarkdownApp')
         return;
   		else if(!$scope.selectedItems){
   			if($scope.overallItems.length > 0){
-  				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]);
+  				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]).body;
   			}
   			else $scope.processedPreview = $scope.activeTemplate;
   		}else if($scope.selectedItems.length === 0){
   			if($scope.overallItems.length > 0)
-  				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]);
+  				$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.overallItems[0]).body;
   		}else {
-  			$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.selectedItems[0]);
+  			$scope.processedPreview = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, $scope.selectedItems[0]).body;
   		}
   		
   		if($scope.processedPreview)	
