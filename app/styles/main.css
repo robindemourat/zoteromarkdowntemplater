@@ -286,3 +286,14 @@ SPECIFIC STYLES
 .selected-list-container{
   /*overflow-y : auto;*/
 }
+
+.alerts{
+  text-align : center;
+  padding-left : 30%;
+  padding-right : 30%;
+  padding-top : 1em;
+}
+
+alert{
+  text-align : center;
+}

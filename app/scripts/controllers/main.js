@@ -191,6 +191,7 @@ angular.module('zoteromarkdownApp')
   		query.quickSearch(expression).start(0);
   		$log.info('new query to zotero', expression);
   		ZoteroQueryHandler.getItems(query.get(), prependToListOfItems);
+      $scope.addAlert('', 'fetching items in zotero, please wait')
   	};
 
   	$scope.changeAPIKey = function(apiKey){
@@ -200,6 +201,11 @@ angular.module('zoteromarkdownApp')
 
     $scope.switchExportAsList = function(){
       $scope.exportAsList = !$scope.exportAsList;
+      if($scope.exportAsList){
+        $scope.addAlert('', 'entries will be exported as a one-file list of processed items');
+      }else{
+        $scope.addAlert('', 'entries will be exported as separate files for each processed item');
+      }
     };
 
     var downloadFile = function(content, filename){
@@ -249,11 +255,11 @@ angular.module('zoteromarkdownApp')
   	};
 
     $scope.addAlert = function(type, msg){
-      $scope.alerts.unshift({type : type, msg: msg});
+      $scope.alerts.push({type : type, msg: msg});
       $scope.$apply();
       $timeout(function(){
         console.log($scope.alerts);
-        $scope.alerts.pop();
+        $scope.alerts.shift();
         console.log($scope.alerts);
       }, 5000);
     }
