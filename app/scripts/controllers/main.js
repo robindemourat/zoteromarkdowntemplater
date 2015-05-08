@@ -208,7 +208,6 @@ angular.module('zoteromarkdownApp')
     };
 
     var downloadFile = function(content, filename){
-      console.log(filename);
       var blob = new Blob([content], { type : 'text/txt' });
       var a = document.createElement("a");
       document.body.appendChild(a);
@@ -230,9 +229,11 @@ angular.module('zoteromarkdownApp')
       }else{
         for(var i in items){
           var item = items[i];
-          console.log()
           var output = ZoteroTemplateParser.parseZoteroItemWithTemplate($scope.activeTemplate, item);
-          downloadFile(output.body, output.filename+'.md');
+          $timeout(function(){
+              $log.info('downloading file'+output.filename+'.md');
+              downloadFile(output.body, output.filename+'.md')
+          }, i*5000);
         }
       }
     };
