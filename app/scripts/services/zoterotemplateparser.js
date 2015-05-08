@@ -12,11 +12,36 @@ angular.module('zoteromarkdownApp')
     var factory = {};
 
     var templatesModels = {
+        'zotero_url' : ['links', 'alternate', 'href'],
     	'title' : ['data', 'title'],
     	'creators' : ['data', 'creators'],
     	'type' : ['data', 'itemType'],
     	'url' : ['data', 'url'],
     	'date' : ['data', 'date'],
+        'language' : ['data', 'language'],
+
+        'short_title' : ['data', 'shortTitle'],
+
+        'abstract' : ['data', 'abstractNote'],
+
+        'website_title' : ['data', 'websiteTitle'],
+
+        'website_type' : ['data', 'websiteType'],
+
+        'ISSN' : ['data', 'ISSN'],
+        'DOI' : ['data', 'DOI'],
+        'issue_number' : ['data', 'issue'],
+        'volume_number': ['data', 'volume'],
+
+        'pages' : ['data', 'pages'],
+
+        'publication_title' : ['data', 'publicationTitle'],
+
+        "library_catalog" : ['data', 'libraryCatalog'],
+
+
+
+
     	'creator_1_first_name' : ['data', 'creators', 0, 'firstName'],
     	'creator_1_last_name' : ['data', 'creators', 0, 'lastName'],
     	'creator_1_type' : ['data', 'creators', 0, 'creatorType'],
@@ -62,7 +87,8 @@ angular.module('zoteromarkdownApp')
     }
 
     var populateTemplate = function(template, item){
-    	var r = /\$(\w+):(\w+)\$/gi;
+        //var r = /\$(\w+):(\w+)\$/gi;
+    	var r = /\$(\w+):?(\w+)?\$/gi;
         var line = template;
     	var matches = line.match(r);
     	if(matches){
@@ -71,7 +97,14 @@ angular.module('zoteromarkdownApp')
     			var expressions = r.exec(matches[+i]);
     			var statement = expressions[1];
 	    		var val = expressions[2];
-	    		var matching = new RegExp('\\\$'+statement+':'+val+'\\\$', 'g');
+                var matching = new RegExp('\\\$'+statement+':'+val+'\\\$', 'g');
+
+                //case of implicit 'set'
+                if(!val){
+                    val = expressions[1];
+                    statement = 'set';
+                    matching = new RegExp('\\\$'+val+'\\\$', 'g');
+                }
 	    		switch(statement){
 	    			//replace by value
 	    			case 'set':

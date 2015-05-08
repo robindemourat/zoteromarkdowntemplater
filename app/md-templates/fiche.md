@@ -1,29 +1,46 @@
-$set:title$, par $set:creator_1_first_name$ $set:creator_1_last_name$
+$title$, par $creator_1_first_name$ $creator_1_last_name$
 ===================
-titre : Notes - [nomAuteur & nomAuteur] - [titre raccourci]
 
 ##Références minimales
-$if:title$
+$title$
 ###Titre
-$set:title$
+$title$
 $endif$
 ###Sous-titre
 ###Auteur
-$set:creator_1_first_name$ $set:creator_1_last_name$
+$creator_1_first_name$ $creator_1_last_name$
 $if:date$
 ###Année
-$set:date$
+$date$
 $endif$
 ###Maison d’édition
 ###Type
-$set:type$
+$type$
+$if:publication_title$
 ###Publication mère
-Nom de la publication - Vol n No n
+Vol $volume_number$ n. $issue_number$
+$endif$
 $if:url$
 ###URL texte complet
-$set:url$
+$url$
+$endif$
+$if:issn$
+###ISSN
+$issn$
+$endif$
+$if:pages$
+##Pages
+$pages$
 $endif$
 ###Ce qui est lu
+
+$if:abstract$
+###Résumé officiel
+$abstract$
+$endif$
+
+###Lien zotero
+$zotero_url$
 
 ##Présentation de l’auteur et du contexte d’énonciation
 
