@@ -8,7 +8,7 @@
  * Controller of the zoteromarkdownApp
  */
 angular.module('zoteromarkdownApp')
-  .controller('MainCtrl', function ($scope, $log, $http, $timeout, ZoteroQueryHandler, ZoteroQueryBuilder, ZoteroTemplateParser) {
+  .controller('MainCtrl', function ($scope, $log, $http, $timeout, ZoteroQueryHandler, ZoteroQueryBuilder, ZoteroTemplateParser, FileDownload) {
     var query;
   	var loadTemplate = function(url){
   		$http
@@ -40,7 +40,7 @@ angular.module('zoteromarkdownApp')
 		  	    $scope.getMore();
             $scope.alerts = [];
   			});
-  		
+
   	};
 
     var preparePreview = function(template, collection){
@@ -66,7 +66,7 @@ angular.module('zoteromarkdownApp')
       }else{
         $scope.processedPreview = preparePreview($scope.activeTemplate, $scope.selectedItems);
       }
-  		
+
   		if($scope.processedPreview){
   			$scope.displayedPreview = markdown.toHTML($scope.processedPreview);
       }
@@ -209,7 +209,8 @@ angular.module('zoteromarkdownApp')
     };
 
     var downloadFile = function(content, filename){
-      var blob = new Blob([content], { type : 'text/txt' });
+      FileDownload.download(filename, 'txt', content);
+      /*var blob = new Blob([content], { type : 'text/txt' });
       var a = document.createElement("a");
       document.body.appendChild(a);
       a.style = "display: none";
@@ -217,7 +218,7 @@ angular.module('zoteromarkdownApp')
       a.href = url;
       a.download = filename;
       a.click();
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(url);*/
     }
 
     $scope.downloadItems = function(items){

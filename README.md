@@ -1,12 +1,3 @@
-# zoteromarkdown
+# Zotero-markdown templater
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.11.1.
-
-## Build & development
-
-Run `grunt` for building and `grunt serve` for preview.
-
-## Testing
-
-Running `grunt test` will run the unit tests with karma.
+Little app that aims at allowing a user to parse his zotero library and output diverse type of populated markdown templates. I use it for generating scholarly references and reading guides.
